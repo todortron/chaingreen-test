@@ -4,3 +4,6 @@
 [submodule "chaingreen-blockchain-gui"]
 	path = chaingreen-blockchain-gui
 	url = https://github.com/todortron/chaingreen-blockchain-gui.git
+[submodule "chaingreen-gui-test"]
+	path = chaingreen-gui-test
+	url = https://github.com/todortron/chaingreen-gui-test.git
