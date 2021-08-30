@@ -62,6 +62,8 @@ class ConsensusConstants:
     MAX_GENERATOR_REF_LIST_SIZE: uint32
     POOL_SUB_SLOT_ITERS: uint64
 
+    INITIAL_FREEZE_END_TIMESTAMP: int
+
     def replace(self, **changes) -> "ConsensusConstants":
         return dataclasses.replace(self, **changes)
 

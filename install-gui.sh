@@ -75,7 +75,7 @@ if [ ! "$CI" ]; then
 	echo "Running git submodule update."
 	echo ""
 	git submodule update
-	cd chaingreen-blockchain-gui
+	cd chaingreen-gui-test
 
 	if [ "$SUBMODULE_BRANCH" ];
 	then
@@ -98,4 +98,4 @@ fi
 echo ""
 echo "Chaingreen blockchain install-gui.sh completed."
 echo ""
-echo "Type 'cd chaingreen-blockchain-gui' and then 'npm run electron &' to start the GUI."
+echo "Type 'cd chaingreen-gui-test' and then 'npm run electron &' to start the GUI."
