@@ -701,6 +701,7 @@ class WalletPeers(FullNodeDiscovery):
         await self.start_tasks()
 
     async def ensure_is_closed(self) -> None:
+        self.connection = await aiosqlite.connect(self.peer_db_path)
         if self.is_closed:
             return None
         await self._close_common()
