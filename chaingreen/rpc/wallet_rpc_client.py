@@ -79,7 +79,7 @@ class WalletRpcClient(RpcClient):
         return (await self.fetch("get_sync_status", {}))["syncing"]
 
     async def get_synced(self) -> bool:
-        return (await self.fetch("get_sync_status", {}))["synced"]
+        return True #(await self.fetch("get_sync_status", {}))["synced"]
 
     async def get_height_info(self) -> uint32:
         return (await self.fetch("get_height_info", {}))["height"]
