@@ -243,11 +243,13 @@ class FullNodeAPI:
             event = self.full_node.pow_creation[request.tip]
             await event.wait()
             wp = await self.full_node.weight_proof_handler.get_proof_of_weight(request.tip)
+            # self.log.warning(f"request.tip in self.full_node.pow_creation - {request.tip}")
         else:
             event = asyncio.Event()
             self.full_node.pow_creation[request.tip] = event
             wp = await self.full_node.weight_proof_handler.get_proof_of_weight(request.tip)
             event.set()
+            # self.log.warning(f"request.tip not in self.full_node.pow_creation - {request.tip}")
         tips = list(self.full_node.pow_creation.keys())
 
         if len(tips) > 4:
@@ -270,6 +272,7 @@ class FullNodeAPI:
         )
         self.full_node.full_node_store.serialized_wp_message_tip = request.tip
         self.full_node.full_node_store.serialized_wp_message = message
+        self.log.warning(f"message - {message}")
         return message
 
     @api_request
@@ -816,10 +819,12 @@ class FullNodeAPI:
                     pool_target = request.pool_target
 
             if peak is None or peak.height <= self.full_node.constants.MAX_SUB_SLOT_BLOCKS:
+                self.log.warning("DIFFICULTY_STARTING")
                 difficulty = self.full_node.constants.DIFFICULTY_STARTING
                 sub_slot_iters = self.full_node.constants.SUB_SLOT_ITERS_STARTING
             else:
                 difficulty = uint64(peak.weight - self.full_node.blockchain.block_record(peak.prev_hash).weight)
+                self.log.warning(f"DIFFICULTY_NEW - {difficulty}")
                 sub_slot_iters = peak.sub_slot_iters
                 for sub_slot in finished_sub_slots:
                     if sub_slot.challenge_chain.new_difficulty is not None:

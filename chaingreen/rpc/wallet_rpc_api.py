@@ -309,8 +309,8 @@ class WalletRpcApi:
             return False, False
 
         config: Dict = load_config(new_root, "config.yaml")
-        farmer_target = config["farmer"].get("xch_target_address")
-        pool_target = config["pool"].get("xch_target_address")
+        farmer_target = config["farmer"].get("cgn_target_address")
+        pool_target = config["pool"].get("cgn_target_address")
         found_farmer = False
         found_pool = False
         selected = config["selected_network"]
@@ -621,16 +621,17 @@ class WalletRpcApi:
         assert self.service.wallet_state_manager is not None
         wallet_id = uint32(int(request["wallet_id"]))
         wallet = self.service.wallet_state_manager.wallets[wallet_id]
-        unspent_records = await self.service.wallet_state_manager.coin_store.get_unspent_coins_for_wallet(wallet_id)
-        balance = await wallet.get_confirmed_balance(unspent_records)
-        pending_balance = await wallet.get_unconfirmed_balance(unspent_records)
-        spendable_balance = await wallet.get_spendable_balance(unspent_records)
-        pending_change = await wallet.get_pending_change_balance()
-        max_send_amount = await wallet.get_max_send_amount(unspent_records)
+        async with self.service.wallet_state_manager.lock:
+            unspent_records = await self.service.wallet_state_manager.coin_store.get_unspent_coins_for_wallet(wallet_id)
+            balance = await wallet.get_confirmed_balance(unspent_records)
+            pending_balance = await wallet.get_unconfirmed_balance(unspent_records)
+            spendable_balance = await wallet.get_spendable_balance(unspent_records)
+            pending_change = await wallet.get_pending_change_balance()
+            max_send_amount = await wallet.get_max_send_amount(unspent_records)
 
-        unconfirmed_removals: Dict[bytes32, Coin] = await wallet.wallet_state_manager.unconfirmed_removals_for_wallet(
-            wallet_id
-        )
+            unconfirmed_removals: Dict[
+                bytes32, Coin
+            ] = await wallet.wallet_state_manager.unconfirmed_removals_for_wallet(wallet_id)
 
         wallet_balance = {
             "wallet_id": wallet_id,
@@ -687,8 +688,8 @@ class WalletRpcApi:
     # this function is just here for backwards-compatibility. It will probably
     # be removed in the future
     async def get_initial_freeze_period(self, _: Dict):
-        # Thursday, September 2, 2021 1:48:33 PM GMT+03:00 DST
-        return {"INITIAL_FREEZE_END_TIMESTAMP": 1630579713}
+        # Mon May 03 2021 17:00:00 GMT+0000
+        return {"INITIAL_FREEZE_END_TIMESTAMP": 1620061200}
 
     async def get_next_address(self, request: Dict) -> Dict:
         """

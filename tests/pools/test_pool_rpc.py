@@ -687,11 +687,11 @@ class TestPoolWalletRpc:
                 if WalletType(int(summary["type"])) == WalletType.POOLING_WALLET:
                     assert False
 
-            async def have_chia():
+            async def have_chaingreen():
                 await self.farm_blocks(full_node_api, our_ph, 1)
                 return (await wallets[0].get_confirmed_balance()) > 0
 
-            await time_out_assert(timeout=WAIT_SECS, function=have_chia)
+            await time_out_assert(timeout=WAIT_SECS, function=have_chaingreen)
 
             creation_tx: TransactionRecord = await client.create_new_pool_wallet(
                 our_ph, "", 0, "localhost:5000", "new", "SELF_POOLING"
@@ -799,11 +799,11 @@ class TestPoolWalletRpc:
                 if WalletType(int(summary["type"])) == WalletType.POOLING_WALLET:
                     assert False
 
-            async def have_chia():
+            async def have_chaingreen():
                 await self.farm_blocks(full_node_api, our_ph, 1)
                 return (await wallets[0].get_confirmed_balance()) > 0
 
-            await time_out_assert(timeout=WAIT_SECS, function=have_chia)
+            await time_out_assert(timeout=WAIT_SECS, function=have_chaingreen)
 
             creation_tx: TransactionRecord = await client.create_new_pool_wallet(
                 pool_a_ph, "https://pool-a.org", 5, "localhost:5000", "new", "FARMING_TO_POOL"
@@ -886,11 +886,11 @@ class TestPoolWalletRpc:
                 if WalletType(int(summary["type"])) == WalletType.POOLING_WALLET:
                     assert False
 
-            async def have_chia():
+            async def have_chaingreen():
                 await self.farm_blocks(full_node_api, our_ph, 1)
                 return (await wallets[0].get_confirmed_balance()) > 0
 
-            await time_out_assert(timeout=WAIT_SECS, function=have_chia)
+            await time_out_assert(timeout=WAIT_SECS, function=have_chaingreen)
 
             creation_tx: TransactionRecord = await client.create_new_pool_wallet(
                 pool_a_ph, "https://pool-a.org", 5, "localhost:5000", "new", "FARMING_TO_POOL"
