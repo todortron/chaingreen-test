@@ -18,15 +18,15 @@ network_overrides: &network_overrides
     testnet0:
       DIFFICULTY_CONSTANT_FACTOR: 10052721566054
       AGG_SIG_ME_ADDITIONAL_DATA: 6f3feef30bda046e3c7430410c3501e0f922b2af8a127d1718f58775e8b26b78
-      GENESIS_CHALLENGE: d4fc858e28d48aefe2e2f1ade86d3a65f8181fd4da77393fba364e1583eb98cd
+      GENESIS_CHALLENGE: d7808a5492ec8d689fe69b35e961685605c55ce28f787a097ba5a1bb67fe2df7
       GENESIS_PRE_FARM_FARMER_PUZZLE_HASH: 7d9239aefc3163dbc9067a98de291ac1e1fef84d4d5a2ae1e7f9ef02d880801d
       GENESIS_PRE_FARM_POOL_PUZZLE_HASH: aeae367369f78566bc7ede3accfa11dccc5c523936b79a70df70d1ac945c0f20
-      INITIAL_FREEZE_END_TIMESTAMP: 1621027178  # Fri May 14 21:19:38 +0000 2021
-      MIN_PLOT_SIZE: 18
+      INITIAL_FREEZE_END_TIMESTAMP: 1630579713  # Thursday, September 2, 2021 1:48:33 PM GMT+03:00 DST
+      MIN_PLOT_SIZE: 2
       NETWORK_TYPE: 1
       MEMPOOL_BLOCK_BUFFER: 10
       EPOCH_BLOCKS: 768
-      DIFFICULTY_STARTING: 30
+      DIFFICULTY_STARTING: 1
   config:
     mainnet:
       address_prefix: "cgn"
@@ -116,7 +116,7 @@ farmer:
   # The farmer will attempt to connect to this full node and harvester
   full_node_peer:
     host: *self_hostname
-    port: 8744
+    port: 58744
   harvester_peer:
     host: *self_hostname
     port: 8778
@@ -165,7 +165,7 @@ timelord:
       - 150000
   full_node_peer:
       host: *self_hostname
-      port: 8744
+      port: 58744
   # Maximum number of seconds allowed for a client to reconnect to the server.
   max_connection_time: 60
   # The ip and port where the TCP clients will connect.
@@ -200,7 +200,7 @@ timelord:
 
 full_node:
   # The full node server (if run) will run on this port
-  port: 8744
+  port: 58744
 
   # Run multiple nodes with different databases by changing the database_path
   database_path: db/blockchain_v1_CHALLENGE.sqlite
@@ -255,7 +255,7 @@ full_node:
   # List of trusted DNS seeders to bootstrap from.
   # If you modify this, please change the hardcode as well from FullNode.set_server()
   dns_servers:
-    - "eu.introducer.chaingreen.org"
+    - "testnet0.introducer.chaingreen.org"
   farmer_peer:
       host: *self_hostname
       port: 8777
@@ -263,8 +263,8 @@ full_node:
       host: *self_hostname
       port: 8746
   introducer_peer:
-      host: eu.introducer.chaingreen.org # Chaingreen AWS introducer IPv4/IPv6
-      port: 8744
+      host: testnet0.introducer.chaingreen.org # Chaingreen AWS introducer IPv4/IPv6
+      port: 58744
   wallet_peer:
     host: *self_hostname
     port: 8749
@@ -301,7 +301,7 @@ ui:
 
 introducer:
   host: *self_hostname
-  port: 8744
+  port: 58744
   max_peers_to_send: 20
   # The introducer will only return peers who it has seen in the last
   # recent_peer_threshold seconds
@@ -328,7 +328,7 @@ wallet:
 
   full_node_peer:
     host: *self_hostname
-    port: 8744
+    port: 58744
 
   testing: False
   database_path: wallet/db/blockchain_wallet_v1_CHALLENGE_KEY.sqlite
@@ -345,8 +345,8 @@ wallet:
   recent_peer_threshold: 6000
 
   introducer_peer:
-    host: eu.introducer.chaingreen.org # Chaingreen AWS introducer IPv4/IPv6
-    port: 8744
+    host: testnet0.introducer.chaingreen.org # Chaingreen AWS introducer IPv4/IPv6
+    port: 58744
 
   ssl:
     private_crt:  "config/ssl/wallet/private_wallet.crt"

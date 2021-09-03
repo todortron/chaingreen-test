@@ -74,8 +74,8 @@ class FullNodeRpcApi:
     # this function is just here for backwards-compatibility. It will probably
     # be removed in the future
     async def get_initial_freeze_period(self, _: Dict):
-        # Mon May 03 2021 17:00:00 GMT+0000
-        return {"INITIAL_FREEZE_END_TIMESTAMP": 1621027178}
+        # Thursday, September 2, 2021 1:48:33 PM GMT+03:00 DST
+        return {"INITIAL_FREEZE_END_TIMESTAMP": 1630579713}
 
     async def get_blockchain_state(self, _request: Dict):
         """

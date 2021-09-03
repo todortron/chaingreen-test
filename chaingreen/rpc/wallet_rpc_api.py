@@ -384,8 +384,8 @@ class WalletRpcApi:
 
     async def get_sync_status(self, request: Dict):
         assert self.service.wallet_state_manager is not None
-        syncing = False #self.service.wallet_state_manager.sync_mode
-        synced = True #await self.service.wallet_state_manager.synced()
+        syncing = self.service.wallet_state_manager.sync_mode
+        synced = await self.service.wallet_state_manager.synced()
         return {"synced": synced, "syncing": syncing, "genesis_initialized": True}
 
     async def get_height_info(self, request: Dict):
@@ -687,8 +687,8 @@ class WalletRpcApi:
     # this function is just here for backwards-compatibility. It will probably
     # be removed in the future
     async def get_initial_freeze_period(self, _: Dict):
-        # Mon May 03 2021 17:00:00 GMT+0000
-        return {"INITIAL_FREEZE_END_TIMESTAMP": 1621027178}
+        # Thursday, September 2, 2021 1:48:33 PM GMT+03:00 DST
+        return {"INITIAL_FREEZE_END_TIMESTAMP": 1630579713}
 
     async def get_next_address(self, request: Dict) -> Dict:
         """

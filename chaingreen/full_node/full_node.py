@@ -186,9 +186,9 @@ class FullNode:
             default_port = None
         if "dns_servers" in self.config:
             dns_servers = self.config["dns_servers"]
-        elif self.config["port"] == 8744:
+        elif self.config["port"] == 58744:
             # If `dns_servers` misses from the `config`, hardcode it if we're running mainnet.
-            dns_servers.append("eu.introducer.chaingreen.org")
+            dns_servers.append("testnet0.introducer.chaingreen.org")
         try:
             self.full_node_peers = FullNodePeers(
                 self.server,
